@@ -4,68 +4,59 @@ This project demonstrates various programming principles that promote maintainab
 
 ## Contents
 - [Clean Code Principles](#clean-code-principles)
-  - [Code Structure](#code-structure)
-  - [Comments and Docstrings](#comments-and-docstrings)
-  - [Naming Conventions](#naming-conventions)
-- [Object-Oriented Programming vs Functional Programming](#oop-vs-functional-programming)
-  - [Functional Programming Basics](#functional-programming-fp-basics)
-  - [Object-Oriented Programming Basics](#object-oriented-programming-oop-basics)
-  - [OOP vs FP Comparison](#oop-vs-fp-comparison)
+  - [Code Structure](clean-code-principles/code_structure.md)
+  - [Code Comments and Documentation](clean-code-principles/comments_and_docstrings.md)
+  - [Naming Conventions](clean-code-principles/naming_conventions.md)
+- [Object-Oriented Programming vs Functional Programming](#object-oriented-programming-vs-functional-programming)
+  - [Functional Programming Basics](OOP%20vs%20Functional%20Programming/functional_basics.md)
+  - [Object-Oriented Programming Basics](OOP%20vs%20Functional%20Programming/oop_basics.md)
+  - [OOP vs FP Comparison](OOP%20vs%20Functional%20Programming/oop_vs_fp_comparison.md)
 - [SOLID Principles](#solid-principles)
-  - [Dependency Inversion Principle](#dependency-inversion-principle-dip)
-  - [Interface Segregation Principle](#interface-segregation-principle-isp)
-  - [Liskov Substitution Principle](#liskov-substitution-principle-lsp)
-  - [Open/Closed Principle](#openclosed-principle-ocp)
-  - [Single Responsibility Principle](#single-responsibility-principle-srp)
+  - [Single Responsibility Principle (SRP)](solid-principles/single_responsibility.md)
+  - [Open/Closed Principle (OCP)](solid-principles/open_closed.md)
+  - [Liskov Substitution Principle (LSP)](solid-principles/liskov_substitution.md)
+  - [Interface Segregation Principle (ISP)](solid-principles/interface_segregation.md)
+  - [Dependency Inversion Principle (DIP)](solid-principles/dependency_inversion.md)
 - [Testing & TDD](#testing-and-tdd)
-  - [Introduction to TDD](#introduction-to-test-driven-development-tdd)
-  - [Why Testing is Important](#why-testing-is-important)
+  - [Introduction to TDD](testing-and-tdd/intro_to_tdd.md)
+  - [Why Testing is Important](testing-and-tdd/why_testing_matters.md)
+- [Project Example: Python Project Structure](#project-example-python-project-structure)
 
 ## Clean Code Principles
 
+Clean code is a set of practices and principles that ensure software is easy to read, maintain, and extend. Following these principles helps developers collaborate more effectively and reduce technical debt.
+
 ## Code Structure
 
-### Explanation:
-Proper code structure is essential for creating readable, maintainable, and efficient programs. A well-organized codebase helps developers understand the project, locate specific functionalities, and make modifications with ease. Here are some key aspects of code structure:
-
 ### 1. **File Organization:**
-- **Modularity:** Break down your code into multiple files and modules based on functionality. For example, separate files for classes, utilities, and configurations.
-- **Naming Conventions:** Use consistent and descriptive naming conventions for files and directories. This helps in quickly identifying the purpose of each file.
+- **Modularity:** Break down your code into multiple files and modules based on functionality.
+- **Naming Conventions:** Use consistent and descriptive naming conventions for files and directories.
 
 ### 2. **Functions and Methods:**
-- **Single Responsibility Principle:** Each function or method should have a single responsibility or task. This makes the code more modular and easier to test.
-- **Descriptive Names:** Use meaningful names for functions and methods that describe their purpose. Avoid generic names like `doSomething` or `handleData`.
+- **Single Responsibility Principle:** Each function should perform a single task.
+- **Descriptive Names:** Use meaningful names instead of generic ones like `doSomething`.
 
 ### 3. **Classes and Objects:**
-- **Encapsulation:** Encapsulate related properties and methods within classes. This keeps related functionalities together and promotes code reuse.
-- **Inheritance and Polymorphism:** Utilize inheritance and polymorphism to create a hierarchical structure for your classes. This reduces code duplication and enhances flexibility.
+- **Encapsulation:** Group related properties and methods inside classes.
+- **Inheritance and Polymorphism:** Reduce redundancy by structuring your classes properly.
 
-### 4. **Code Comments and Documentation:**
-- **Inline Comments:** Add comments within your code to explain complex logic or important sections. This aids in understanding the code later on.
-- **Documentation:** Create separate documentation files or comments to provide an overview of the codebase, its modules, and their interactions.
-
-### 5. **Consistent Formatting:**
-- **Indentation:** Use consistent indentation to enhance readability. Most coding standards recommend using 2 or 4 spaces per indentation level.
-- **Spacing and Line Breaks:** Add appropriate spacing and line breaks between code blocks to separate different sections visually.
-
-### 6. **Error Handling:**
-- **Try-Catch Blocks:** Use try-catch blocks to handle exceptions and errors gracefully. This prevents the program from crashing and provides informative error messages.
-- **Logging:** Implement logging mechanisms to track errors and important events within the code. This helps in debugging and monitoring the system.
+### 4. **Consistent Formatting:**
+- **Indentation:** Use consistent indentation (2 or 4 spaces per level).
+- **Spacing and Line Breaks:** Visually separate different sections of the code.
 
 ## Code Comments and Documentation
 
-### Explanation:
-Code comments and documentation are crucial for making your code understandable to others. Proper documentation helps both current and future developers maintain and extend the code.
-
 ### 1. **Inline Comments:**
-- Use inline comments to explain what specific sections of the code are doing. This is especially important for complex or non-obvious logic.
+Use comments to explain complex logic:
 ```python
+# Multiply price by quantity to get the total
 def calculate_total(price, quantity):
-    # Multiply price by quantity to get the total
     return price * quantity
-2. Function and Method Documentation:
-Each function or method should have a comment explaining its purpose, parameters, and return values.
+```
 
+### 2. **Function and Method Documentation:**
+Provide docstrings for better understanding:
+```python
 def calculate_total(price, quantity):
     """
     Calculate the total price based on price and quantity.
@@ -78,9 +69,10 @@ def calculate_total(price, quantity):
     float: The total price.
     """
     return price * quantity
-3. Class Documentation:
-Classes should be documented at the beginning to explain their purpose and attributes.
+```
 
+### 3. **Class Documentation:**
+```python
 class User:
     """
     Represents a user in the system.
@@ -92,34 +84,40 @@ class User:
     def __init__(self, username, email):
         self.username = username
         self.email = email
-Naming Conventions
-Explanation:
-Naming conventions are essential for consistency and readability. By following naming conventions, developers can quickly understand the role and purpose of variables, functions, and classes.
+```
 
-1. Variables:
-Use descriptive names for variables that indicate the data they hold.
+## Naming Conventions
+
+### 1. **Variables:**
 Use snake_case for variables in Python.
-
+```python
 total_price = 100
 user_age = 25
-2. Functions:
-Function names should describe what the function does, using a verb-noun pair.
-Use snake_case for functions in Python.
+```
 
+### 2. **Functions:**
+```python
 def calculate_total_price(price, quantity):
     return price * quantity
-3. Classes:
-Class names should be in PascalCase and describe the object the class represents.
+```
 
+### 3. **Classes:**
+Use PascalCase for class names.
+```python
 class User:
     pass
-4. Constants:
-Use ALL_CAPS for constants to distinguish them from regular variables.
+```
 
+### 4. **Constants:**
+Use ALL_CAPS for constants.
+```python
 MAX_USERS = 100
-Project Example: Python Project Structure
+```
+
+## Project Example: Python Project Structure
 A well-structured Python project typically includes directories for source code, tests, and documentation. Here's an example of how to organize your project files:
 
+```
 my_project/
 │
 ├── src/
@@ -145,9 +143,10 @@ my_project/
 │       └── test_order.py
 │
 └── README.md
-Key Points:
+```
 
-src: Contains the source code of the project, organized into modules and packages.
-tests: Contains test files organized similarly to the source code structure.
-README.md: Provides an overview of the project, how to set it up, and how to use it.
+### Key Points:
+- **`src/`**: Contains the source code of the project.
+- **`tests/`**: Contains test files.
+- **`README.md`**: Provides an overview of the project.
 By following these principles and practices, you can create a well-structured codebase that is easy to read, maintain, and scale.
