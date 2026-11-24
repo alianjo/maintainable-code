@@ -1,152 +1,118 @@
-# maintainable-code
+# Maintainable Code
 
-This project demonstrates various programming principles that promote maintainability, readability, and scalability of software. The main principles covered in this project include **Clean Code**, **SOLID Principles**, **Test-Driven Development (TDD)**, and more.
+A practical Python learning repository for writing software that is easier to understand, test, change, and extend.
 
-## Contents
-- [Clean Code Principles](#clean-code-principles)
-  - [Code Structure](clean-code-principles/code_structure.md)
-  - [Code Comments and Documentation](clean-code-principles/comments_and_docstrings.md)
-  - [Naming Conventions](clean-code-principles/naming_conventions.md)
-- [Object-Oriented Programming vs Functional Programming](#object-oriented-programming-vs-functional-programming)
-  - [Functional Programming Basics](OOP%20vs%20Functional%20Programming/functional_basics.md)
-  - [Object-Oriented Programming Basics](OOP%20vs%20Functional%20Programming/oop_basics.md)
-  - [OOP vs FP Comparison](OOP%20vs%20Functional%20Programming/oop_vs_fp_comparison.md)
-- [SOLID Principles](#solid-principles)
-  - [Single Responsibility Principle (SRP)](solid-principles/single_responsibility.md)
-  - [Open/Closed Principle (OCP)](solid-principles/open_closed.md)
-  - [Liskov Substitution Principle (LSP)](solid-principles/liskov_substitution.md)
-  - [Interface Segregation Principle (ISP)](solid-principles/interface_segregation.md)
-  - [Dependency Inversion Principle (DIP)](solid-principles/dependency_inversion.md)
-- [Testing & TDD](#testing-and-tdd)
-  - [Introduction to TDD](testing-and-tdd/intro_to_tdd.md)
-  - [Why Testing is Important](testing-and-tdd/why_testing_matters.md)
-- [Project Example: Python Project Structure](#project-example-python-project-structure)
+This repository combines **short engineering guides** with a **runnable example application**. It is intended to be studied incrementally: read a principle, inspect the implementation, run the tests, then try the exercises.
 
-## Clean Code Principles
+## What is included?
 
-Clean code is a set of practices and principles that ensure software is easy to read, maintain, and extend. Following these principles helps developers collaborate more effectively and reduce technical debt.
+- **Fundamentals:** clean code, naming, small functions, cohesion, coupling, and useful comments.
+- **SOLID:** all five principles with Python-oriented examples and trade-offs.
+- **Design and architecture:** composition, dependency inversion, ports and adapters, and pragmatic design patterns.
+- **Testing:** unit and integration tests, test doubles, behavior-focused assertions, and a practical TDD workflow.
+- **Python practices:** type hints, `Protocol`, dataclasses, exceptions, project configuration, and code quality automation.
+- **A working example:** a small checkout flow separated into domain, application, and infrastructure layers.
+- **Automation:** pytest, Ruff, and a GitHub Actions workflow.
 
-## Code Structure
+## Learning path
 
-### 1. **File Organization:**
-- **Modularity:** Break down your code into multiple files and modules based on functionality.
-- **Naming Conventions:** Use consistent and descriptive naming conventions for files and directories.
+Start with [the learning path](docs/learning-path.md), then follow the guides in order. You do not need to read everything at once.
 
-### 2. **Functions and Methods:**
-- **Single Responsibility Principle:** Each function should perform a single task.
-- **Descriptive Names:** Use meaningful names instead of generic ones like `doSomething`.
+| Area | Guide | What you will learn |
+|---|---|---|
+| Fundamentals | [Clean Code](docs/principles/clean-code.md) | Naming, functions, boundaries, comments, and readability |
+| Principles | [SOLID](docs/principles/solid.md) | Designing modules that are easier to change |
+| Programming styles | [OOP and Functional Programming](docs/principles/oop-and-functional.md) | Modeling state and writing deterministic transformations |
+| Architecture | [Layered Architecture](docs/architecture/layered-architecture.md) | Separating business rules from details |
+| Testing | [Testing and TDD](docs/testing/tdd-and-pytest.md) | Tests as feedback and executable documentation |
+| Maintenance | [Refactoring](docs/techniques/refactoring.md) | Improving structure without changing behavior |
+| Python | [Type Hints and Protocols](docs/python/type-hints-and-protocols.md) | Making boundaries explicit with Python typing |
+| Reliability | [Error Handling and Logging](docs/python/error-handling-and-logging.md) | Making failures diagnosable and safe to handle |
+| Design | [Design Patterns](docs/patterns/design-patterns.md) | Applying patterns only when they solve a real problem |
+| Quality | [Review Checklist](docs/code-review-checklist.md) | A repeatable checklist for everyday work |
 
-### 3. **Classes and Objects:**
-- **Encapsulation:** Group related properties and methods inside classes.
-- **Inheritance and Polymorphism:** Reduce redundancy by structuring your classes properly.
+## Quick start
 
-### 4. **Consistent Formatting:**
-- **Indentation:** Use consistent indentation (2 or 4 spaces per level).
-- **Spacing and Line Breaks:** Visually separate different sections of the code.
+Python 3.11 or newer is required. The application itself uses only the Python standard library; pytest and Ruff are development tools.
 
-## Code Comments and Documentation
+### Windows PowerShell
 
-### 1. **Inline Comments:**
-Use comments to explain complex logic:
-```python
-# Multiply price by quantity to get the total
-def calculate_total(price, quantity):
-    return price * quantity
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -e ".[dev]"
+python -m pytest
+python -m ruff check .
+python -m ruff format --check .
+python -m maintainable_shop.demo
 ```
 
-### 2. **Function and Method Documentation:**
-Provide docstrings for better understanding:
-```python
-def calculate_total(price, quantity):
-    """
-    Calculate the total price based on price and quantity.
-    
-    Parameters:
-    price (float): The price of one item.
-    quantity (int): The number of items.
-    
-    Returns:
-    float: The total price.
-    """
-    return price * quantity
+### macOS / Linux
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -e ".[dev]"
+python -m pytest
+python -m ruff check .
+python -m ruff format --check .
+python -m maintainable_shop.demo
 ```
 
-### 3. **Class Documentation:**
-```python
-class User:
-    """
-    Represents a user in the system.
-    
-    Attributes:
-    username (str): The username of the user.
-    email (str): The email address of the user.
-    """
-    def __init__(self, username, email):
-        self.username = username
-        self.email = email
-```
+## Project structure
 
-## Naming Conventions
-
-### 1. **Variables:**
-Use snake_case for variables in Python.
-```python
-total_price = 100
-user_age = 25
-```
-
-### 2. **Functions:**
-```python
-def calculate_total_price(price, quantity):
-    return price * quantity
-```
-
-### 3. **Classes:**
-Use PascalCase for class names.
-```python
-class User:
-    pass
-```
-
-### 4. **Constants:**
-Use ALL_CAPS for constants.
-```python
-MAX_USERS = 100
-```
-
-## Project Example: Python Project Structure
-A well-structured Python project typically includes directories for source code, tests, and documentation. Here's an example of how to organize your project files:
-
-```
-my_project/
-│
-├── src/
-│   ├── __init__.py
-│   ├── main.py
-│   ├── utils.py
-│   ├── models/
-│   │   ├── __init__.py
-│   │   ├── user.py
-│   │   └── order.py
-│   └── controllers/
-│       ├── __init__.py
-│       ├── user_controller.py
-│       └── order_controller.py
-│
+```text
+maintainable-code/
+├── .github/workflows/ci.yml
+├── docs/                         # Conceptual guides and checklists
+├── examples/                     # Small focused examples
+├── src/maintainable_shop/
+│   ├── domain/                    # Business rules and domain objects
+│   ├── application/               # Use cases and dependency contracts
+│   ├── infrastructure/            # In-memory development adapters
+│   └── demo.py                    # Runnable composition example
 ├── tests/
-│   ├── __init__.py
-│   ├── test_main.py
-│   ├── test_utils.py
-│   └── test_models/
-│       ├── __init__.py
-│       ├── test_user.py
-│       └── test_order.py
-│
+│   ├── unit/
+│   └── integration/
+├── pyproject.toml
 └── README.md
 ```
 
-### Key Points:
-- **`src/`**: Contains the source code of the project.
-- **`tests/`**: Contains test files.
-- **`README.md`**: Provides an overview of the project.
-By following these principles and practices, you can create a well-structured codebase that is easy to read, maintain, and scale.
+## Example architecture
+
+The checkout example intentionally stays small so the boundaries are visible:
+
+- `domain` contains `Money`, `Order`, and `OrderItem`. It does not import database, network, or framework code.
+- `application` contains the checkout use case and `Protocol` contracts for payment, persistence, notifications, and discount policies.
+- `infrastructure` contains in-memory adapters suitable for learning and tests—not production payment or database integrations.
+- `tests` verify domain behavior and the full checkout flow without network access.
+
+The example demonstrates separation of concerns and dependency inversion. It is **not** a production-ready commerce system: it does not solve distributed transactions, payment idempotency, authentication, tax, inventory, or real payment processing.
+
+## Quality commands
+
+```bash
+python -m pytest                 # Run all tests
+python -m pytest -q              # Compact test output
+python -m ruff check .           # Lint
+python -m ruff format --check .  # Verify formatting
+python -m ruff format .         # Apply formatting
+```
+
+## Contributing
+
+Contributions should improve clarity or correctness, not add abstraction for its own sake. Before opening a pull request:
+
+1. Explain the problem the change solves.
+2. Keep examples runnable and focused.
+3. Add or update tests when behavior changes.
+4. Run the quality commands above.
+5. Update the relevant guide when the design lesson changes.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution workflow and [the review checklist](docs/code-review-checklist.md) before submitting changes.
+
+## Repository history and licensing note
+
+This repository began as a fork of [alianjo/maintainable-code](https://github.com/alianjo/maintainable-code). The current version expands the original topic outline with independently written guides, code, tests, and automation. The upstream repository did not expose a license in its GitHub repository metadata when this revision was prepared; do not assume that the inherited upstream material is relicensed. Review the upstream repository's licensing status before redistributing inherited material.
